@@ -29,18 +29,18 @@ const create = async ({ product_name, decription, image, price, rating }) => {
         return { code: 500, status: false, message: "Internal Error" }
     }
 }
-const getallproduct = async ({ skip, limit, search, columnName, orderBy }) => {
+const getallproduct = async ({ skip, limit, columnName, orderBy }) => {
     try {
         /*
           1. find all product.
-            2. Apply filter
+           2. Apply filter
         */
-        columnName = 'id'; // default column name
-        orderBy = 'ASC'; // default sort order
+        // columnName = 'id'; // default column name
+        // orderBy = 'ASC'; // default sort order
 
         const data = await productModels.findAll({
             order: [
-                [`${columnName}`, `${orderBy}`],
+                [`${columnName ? columnName : 'id'}`, `${orderBy === 'ASC' ? 'ASC' : 'DESC'}`],
             ],
             offset: Number(skip) < 0 ? 0 : Number(skip) || 0,
             limit: Number(limit) < 0 ? 5 : Number(limit) || 60,
