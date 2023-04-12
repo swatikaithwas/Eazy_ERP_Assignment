@@ -24,7 +24,7 @@ const createProduct = async (req, res) => {
         if (!data.status) return res.status(data.code).send({ status: false, data: null, message: data.message })
         else return res.status(data.code).send({ status: true, data: data.data, message: "successfully product created" })
     } catch (error) {
-        return res.status(500).send({ status: false, message: "error createing product" })
+        return res.status(500).send({ status: false, message: "error" })
     }
 }
 
@@ -54,7 +54,7 @@ const getProductById = async (req, res) => {
         if (!data.status) return res.status(data.code).send({ status: false, data: null, message: data.message })
         else return res.status(data.code).send({ status: true, data: data.data, message: "successfully" })
     } catch (error) {
-        return res.status(500).send({ status: false, message: "error" })
+        return res.status(500).send({ status: false, message: error.message })
     }
 }
 
@@ -85,7 +85,7 @@ const updateProduct = async (req, res) => {
         /*
         1. Id mandatory field.
         */
-        // let  = req.body.id;
+
         const { id, product_name, decription, rating, price } = req.body;
         const updatedProduct = {
             product_name,

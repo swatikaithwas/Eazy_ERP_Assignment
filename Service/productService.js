@@ -32,16 +32,13 @@ const create = async ({ product_name, decription, image, price, rating }) => {
 const getallproduct = async ({ skip, limit, search, columnName, orderBy }) => {
     try {
         /*
-  1. find all product.
-  2. Apply filter
-  */
+          1. find all product.
+            2. Apply filter
+        */
         columnName = 'id'; // default column name
         orderBy = 'ASC'; // default sort order
 
         const data = await productModels.findAll({
-            // where: {
-            //     [Op.iLike]: `%${search}%`,
-            // },
             order: [
                 [`${columnName}`, `${orderBy}`],
             ],
